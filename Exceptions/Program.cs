@@ -26,7 +26,7 @@ namespace Exceptions
                     Console.ReadLine();
                 }
                 
-            }//
+            }
             catch (Exception)
             {
 
