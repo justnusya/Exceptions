@@ -11,9 +11,10 @@ namespace Exceptions
     {
         static void Main(string[] args)
         {
-            /*
+            int count = 0; double sum = 0;
             for (int i = 10; i < 30; i++)
             {
+                int multiplication=0;
                 try
                 {
                     int line1, line2;
@@ -22,8 +23,7 @@ namespace Exceptions
                         line1 = int.Parse(reader.ReadLine());
                         line2 = int.Parse(reader.ReadLine());
                     }
-                    Console.WriteLine(line1);
-                    Console.WriteLine(line2);
+                    multiplication = (int)line1 * line2;
                 }
                 catch (FileNotFoundException)
                 {
@@ -31,6 +31,7 @@ namespace Exceptions
                     {
                         writer.WriteLine($"{i}.txt");
                     }
+                    continue;
                 }
                 catch (FormatException)
                 {
@@ -38,6 +39,7 @@ namespace Exceptions
                     {
                         writer2.WriteLine($"{i}.txt");
                     }
+                    continue;
                 }
                 catch (ArgumentNullException)
                 {
@@ -45,54 +47,20 @@ namespace Exceptions
                     {
                         writer2.WriteLine($"{i}.txt");
                     }
+                    continue;
                 }
-                Console.WriteLine("everything seems to be correct");
-                break;
-            }
-            */
-
-            int i = 10;
-
-            try
-            {
-                int line1, line2;
-                using (StreamReader reader = new StreamReader($"{i}.txt"))
+                catch (OverflowException)
                 {
-                    line1 = int.Parse(reader.ReadLine());
-                    line2 = int.Parse(reader.ReadLine());
+                    using (StreamWriter writer3 = new StreamWriter("overflow.txt", true))
+                    {
+                        writer3.WriteLine($"{i}.txt");
+                    }
+                    continue;
                 }
-                int multiplication = (int) line1 * line2;
+                count++;
+                sum += multiplication;
             }
-            catch (FileNotFoundException)
-            {
-                using (StreamWriter writer = new StreamWriter("no_file.txt", true))
-                {
-                    writer.WriteLine($"{i}.txt");
-                }
-            }
-            catch (FormatException)
-            {
-                using (StreamWriter writer2 = new StreamWriter("bad_data.txt", true))
-                {
-                    writer2.WriteLine($"{i}.txt");
-                }
-            }
-            catch (ArgumentNullException)
-            {
-                using (StreamWriter writer2 = new StreamWriter("bad_data.txt", true))
-                {
-                    writer2.WriteLine($"{i}.txt");
-                }
-            }
-            catch (OverflowException)
-            {
-                using (StreamWriter writer3 = new StreamWriter("overflow.txt", true))
-                {
-                    writer3.WriteLine($"{i}.txt");
-                }
-            }
-            Console.WriteLine("everything seems to be correct");
-            return;
+            Console.WriteLine(sum / (double) count);
 
             //int hello = 2147483648;
             Console.ReadLine();
