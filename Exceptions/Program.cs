@@ -11,59 +11,67 @@ namespace Exceptions
     {
         static void Main(string[] args)
         {
-            int count = 0; double sum = 0;
-            for (int i = 10; i < 30; i++)
+            try
             {
-                int multiplication=0;
-                try
+                int count = 0; double sum = 0;
+                for (int i = 10; i < 30; i++)
                 {
-                    int line1, line2;
-                    using (StreamReader reader = new StreamReader($"{i}.txt"))
+                    int multiplication = 0;
+                    try
                     {
-                        line1 = int.Parse(reader.ReadLine());
-                        line2 = int.Parse(reader.ReadLine());
+                        int line1, line2;
+                        using (StreamReader reader = new StreamReader($"{i}.txt"))
+                        {
+                            line1 = int.Parse(reader.ReadLine());
+                            line2 = int.Parse(reader.ReadLine());
+                        }
+                        multiplication = (int)line1 * line2;
                     }
-                    multiplication = (int)line1 * line2;
-                }
-                catch (FileNotFoundException)
-                {
-                    using (StreamWriter writer = new StreamWriter("no_file.txt", true))
+                    catch (FileNotFoundException)
                     {
-                        writer.WriteLine($"{i}.txt");
+                        using (StreamWriter writer = new StreamWriter("no_file.txt", true))
+                        {
+                            writer.WriteLine($"{i}.txt");
+                        }
+                        continue;
                     }
-                    continue;
-                }
-                catch (FormatException)
-                {
-                    using (StreamWriter writer2 = new StreamWriter("bad_data.txt", true))
+                    catch (FormatException)
                     {
-                        writer2.WriteLine($"{i}.txt");
+                        using (StreamWriter writer2 = new StreamWriter("bad_data.txt", true))
+                        {
+                            writer2.WriteLine($"{i}.txt");
+                        }
+                        continue;
                     }
-                    continue;
-                }
-                catch (ArgumentNullException)
-                {
-                    using (StreamWriter writer2 = new StreamWriter("bad_data.txt", true))
+                    catch (ArgumentNullException)
                     {
-                        writer2.WriteLine($"{i}.txt");
+                        using (StreamWriter writer2 = new StreamWriter("bad_data.txt", true))
+                        {
+                            writer2.WriteLine($"{i}.txt");
+                        }
+                        continue;
                     }
-                    continue;
-                }
-                catch (OverflowException)
-                {
-                    using (StreamWriter writer3 = new StreamWriter("overflow.txt", true))
+                    catch (OverflowException)
                     {
-                        writer3.WriteLine($"{i}.txt");
+                        using (StreamWriter writer3 = new StreamWriter("overflow.txt", true))
+                        {
+                            writer3.WriteLine($"{i}.txt");
+                        }
+                        continue;
                     }
-                    continue;
+                    count++;
+                    sum += multiplication;
                 }
-                count++;
-                sum += multiplication;
-            }
-            Console.WriteLine(sum / (double) count);
+                Console.WriteLine(sum / (double)count);
 
-            //int hello = 2147483648;
-            Console.ReadLine();
+                //int hello = 2147483648;
+                Console.ReadLine();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Oops! Something went wrong..");
+                Console.ReadLine();
+            }
         }
     }
 }
