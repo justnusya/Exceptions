@@ -18,6 +18,15 @@ namespace task2
             Regex regexExtForImage = new Regex(@"^((bmp)|(gif)|(tiff?)|(jpe?g)|(png))$", RegexOptions.IgnoreCase);
             foreach(string file in files)
             {
+                try
+                {
+                    using (Bitmap bitmap = new Bitmap(file))
+                    {
+                        bitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                        string newName = Path.GetFileNameWithoutExtension(file) + "-mirrored.gif";
+                        bitmap.Save(newName, System.Drawing.Imaging.ImageFormat.Gif);
+                    }
+                }
                 if (regexExtForImage.IsMatch(Path.GetExtension(file)))
                 {
 
