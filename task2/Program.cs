@@ -15,7 +15,7 @@ namespace task2
         static void Main()
         {
             string[] files = Directory.GetFiles(Directory.GetCurrentDirectory());
-            Regex regexExtForImage = new Regex(@"^((bmp)|(gif)|(tiff?)|(jpe?g)|(png))$", RegexOptions.IgnoreCase);
+            Regex regexExtForImage = new Regex("^((bmp)|(gif)|(tiff?)|(jpe?g)|(png))$", RegexOptions.IgnoreCase);
             foreach(string file in files)
             {
                 try
@@ -27,9 +27,12 @@ namespace task2
                         bitmap.Save(newName, System.Drawing.Imaging.ImageFormat.Gif);
                     }
                 }
-                if (regexExtForImage.IsMatch(Path.GetExtension(file)))
+                catch(Exception)
                 {
-
+                    if (regexExtForImage.IsMatch(Path.GetExtension(file)))
+                    {
+                        MessageBox.Show($"{file} isn't an image, its extension says the opposite though");
+                    }
                 }
             }
         }
