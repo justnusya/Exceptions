@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace task2
 {
@@ -12,9 +14,15 @@ namespace task2
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            string[] files = Directory.GetFiles(Directory.GetCurrentDirectory());
+            Regex regexExtForImage = new Regex(@"^((bmp)|(gif)|(tiff?)|(jpe?g)|(png))$", RegexOptions.IgnoreCase);
+            foreach(string file in files)
+            {
+                if (regexExtForImage.IsMatch(Path.GetExtension(file)))
+                {
+
+                }
+            }
         }
     }
 }
