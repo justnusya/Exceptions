@@ -15,7 +15,7 @@ namespace task2
         static void Main()
         {
             string[] files = Directory.GetFiles(Directory.GetCurrentDirectory());
-            Regex regexExtForImage = new Regex("^((bmp)|(gif)|(tiff?)|(jpe?g)|(png))$", RegexOptions.IgnoreCase);
+            Regex regexExtForImage = new Regex(@"^\.((bmp)|(gif)|(tiff?)|(jpe?g)|(png))$", RegexOptions.IgnoreCase);
             foreach(string file in files)
             {
                 try
