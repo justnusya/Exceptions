@@ -25,7 +25,7 @@ namespace Exceptions
                             line1 = int.Parse(reader.ReadLine());
                             line2 = int.Parse(reader.ReadLine());
                         }
-                        multiplication = (int)line1 * line2;
+                        multiplication = checked(line1 * line2);
                     }
                     catch (FileNotFoundException)
                     {
